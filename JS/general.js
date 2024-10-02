@@ -73,13 +73,13 @@ var GeneradorColumnas = (function () {
             return;
         }
 
-        cargarSemillas(parseInt(semilla));
+        crearSemillas(parseInt(semilla));
         document.getElementById("id-row-est").style.display = "block";
         document.getElementById("tabla-1").style.display = "block";
         document.getElementById("tabla-2").style.display = "block";
     }
 
-    function cargarSemillas(seed) {
+    function crearSemillas(seed) {
         for (var k = 1; k < seed + 1; k++) {
             var fila = `
             <tr style="background-color: white;">
