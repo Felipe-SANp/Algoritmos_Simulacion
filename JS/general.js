@@ -132,6 +132,7 @@ var GeneradorDatos = (function () {
     function ejecutarAlgoritmo(semillas, m, n) {
         const buffer = new Array(semillas.length);
         const conjunto = new Set();
+        const mapValores = new Map(); 
 
         for (let i = 0; i < semillas.length; i++) {
             buffer[i] = Number(semillas[i]);
@@ -139,12 +140,23 @@ var GeneradorDatos = (function () {
         }
 
         let i = semillas.length;
+        let a = 0; 
         while (true) {
             const x_i_n = buffer[i - 1] + buffer[i - semillas.length];
             const nuevoValor = x_i_n % m;
             const result = nuevoValor / (m - 1);
 
             if (conjunto.has(result)) {
+                const index = parseInt(mapValores.get(result));
+                const fila = `
+                    <tr style="background-color: white; color:red;">
+                        <td>X<sub>${i + 1}</sub></td>
+                        <td>${buffer[i - 1]} + ${buffer[i - semillas.length]}</td>
+                        <td>${x_i_n} mod ${m}</td>
+                        <td>${result}</td>
+                    </tr>`;
+                document.getElementById('result'+index).style.color = "blue";
+                document.getElementById('t02').innerHTML += fila;
                 break;
             }
 
@@ -154,9 +166,10 @@ var GeneradorDatos = (function () {
 
             buffer.push(nuevoValor);
             conjunto.add(result);
+            mapValores.set(result, a); 
 
             const fila = `
-            <tr style="background-color: white;">
+            <tr id="result${a}" style="background-color: white;">
                 <td>X<sub>${i + 1}</sub></td>
                 <td>${buffer[i - 1]} + ${buffer[i - semillas.length]}</td>
                 <td>${x_i_n} mod ${m}</td>
@@ -165,6 +178,7 @@ var GeneradorDatos = (function () {
             document.getElementById('t02').innerHTML += fila;
 
             i++;
+            a++;
         }
     }
 
