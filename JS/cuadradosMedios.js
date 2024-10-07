@@ -52,3 +52,10 @@ document.getElementById('generarDatosBtn').addEventListener('click', function() 
 
     cuadradosMedios(semilla, n);
 });
+
+function limpiarDatos() {
+    document.getElementById('id-semilla').value = '';
+    document.getElementById('id-n').value = '';
+    document.getElementById('t01').innerHTML = '';
+}
+document.getElementById("limpiarBtn").addEventListener("click", limpiarDatos);
