@@ -12,11 +12,17 @@ function esPrimo(n) {
     return n > 1;
 }
 
-// Función para encontrar el número primo más cercano a m
+// Función para encontrar el número primo a la izquierda más cercano a m
 function primoMasCercano(m) {
     let num = m;
-    while(!esPrimo(num)) {
-        num++;
+    while(!esPrimo(num) && num > 0) {
+        num--;
+    }
+    if (num === 0) {
+        while(!esPrimo(m)) {
+            m++;
+        }
+        num = m;
     }
     return num;
 }
