@@ -55,3 +55,12 @@ document.getElementById('generarDatosBtn').addEventListener('click', function() 
 
     multiplicadorConstante(semilla, constante, n);
 });
+
+function limpiarDatos() {
+    document.getElementById('id-semilla').value = '';
+    document.getElementById('id-constante').value = '';
+    document.getElementById('id-n').value = '';
+    document.getElementById('t01').innerHTML = '';
+}
+
+document.getElementById("limpiarBtn").addEventListener("click", limpiarDatos);
