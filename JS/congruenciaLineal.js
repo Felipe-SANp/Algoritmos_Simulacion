@@ -12,17 +12,11 @@ function esPrimo(n) {
     return n > 1;
 }
 
-// Función para encontrar el número primo a la izquierda más cercano a m
+// Función para encontrar el número primo a la izquierda/derecha más cercano a m
 function primoMasCercano(m) {
     let num = m;
-    while(!esPrimo(num) && num > 0) {
-        num--;
-    }
-    if (num === 0) {
-        while(!esPrimo(m)) {
-            m++;
-        }
-        num = m;
+    while (!esPrimo(num) && num > 2) {
+      num--;
     }
     return num;
 }
@@ -37,8 +31,8 @@ function congruenciaLineal(X0, k, g) {
     let numerosPseudoaleatorios = [];
     let Xi = X0;  // Semilla inicial
 
-    // Verificar que c es relativamente primo con m
-    if (gcd(c, m) !== 1) {
+    // Verificar que c es relativamente primo con m o que ambos son 2
+    if ((gcd(c, m) !== 1) && !(c == 2 && m == 2)) {
         console.error("Error: 'c' no es relativamente primo con 'm'.");
         return;
     }
