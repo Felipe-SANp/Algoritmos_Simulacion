@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/estilos.css">
+    <link rel="shortcut icon" href="oswla.png">
+    <title>Black Lion 2.0</title>
+</head>
+
+<body>
+    <div class="contenedor-primario">
+
+        <h2 id="titulo">Metodo Cuadrados Medios</h2>
+
+        <div class="menu-opciones">
+            <button class="menu-boton" id="limpiarBtn" type="button">Limpiar</button>
+            <button class="menu-boton" id="exportarBtn" type="button">Exportar (png)</button>
+        </div>
+
+        <div class="contenido_tabla">
+            <div>
+                <div class="row-est" id="id-row-est" style="display: block;">
+                    <div class="caja-gen">
+                        <form class="form-est">
+                            <div class="row">
+                                <input type="number" id="id-semilla" placeholder="Semilla">
+                                <input type="number" id="id-n" placeholder="N">
+                                <button class="myButton" id="generarDatosBtn" type="button">Generar datos</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tabla" id="tabla" style="display: block;">
+                    <table id="t01" style="width: 580px; ">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/cuadradosMedios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+
+</body>
+
+</html>
