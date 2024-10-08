@@ -52,6 +52,23 @@ input {
   text-align: center;
 }
 
+.menu-algoritmos {
+  /* padding: 10px 0; */
+  text-align: center;
+}
+.menu-algoritmos select {
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  /* border: 1px solid #ffffff; */
+  background-color: #4564c7;
+  color: #ffffff;
+  cursor: pointer;
+}
+.menu-algoritmos select:hover {
+  background-color: #2a58bd;
+}
+
 .menu-opciones{
   display: flex;
   justify-content: end;
