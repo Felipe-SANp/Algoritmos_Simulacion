@@ -5,7 +5,7 @@ body {
 #titulo {
   text-align: center;
   padding: 20px;
-  background-color: #1359c4;
+  background-color: #2a58bd;
   color: #ffffff;
 }
 
@@ -61,7 +61,7 @@ input {
   padding: 10px 15px;
   border-radius: 6px;
   /* border: 1px solid #ffffff; */
-  background-color: #4564c7;
+  background-color: #2a58bd;
   color: #ffffff;
   cursor: pointer;
 }
@@ -76,7 +76,7 @@ input {
 }
 
 .myButton {
-  background-color: #4564c7;
+  background-color: #2a58bd;
   border-radius: 6px;
   border: transparent;
   cursor: pointer;
@@ -88,7 +88,7 @@ input {
 }
 
 .menu-boton {
-  background-color: #4564c7;;
+  background-color: #2a58bd;
   border: transparent;
   cursor: pointer;
   color: #ffffff;
@@ -99,7 +99,7 @@ input {
 }
 
 .myButton:hover, .menu-boton:hover {
-  background-color: #2a58bd;
+  background-color: #4564c7;
 }
 
 .tabla-1{

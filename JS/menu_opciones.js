@@ -1,27 +1,24 @@
 function cambiarAlgoritmo() {
     var algoritmo = document.getElementById("algoritmo-selector").value;
-    var titulo = document.getElementById("titulo");
     
     switch(algoritmo) {
-        case "cuadrados-medios":
+        case "2":
             window.location.href = "index2.html";
             break;
-        case "productos-medios":
+        case "3":
             window.location.href = "index3.html";
             break;
-        case "multiplicador-constante":
+        case "4":
             window.location.href = "index4.html";
             break;
-        case "lineal":
+        case "5":
             window.location.href = "index5.html";
             break;
-        case "congruencial-multiplicativo":
+        case "6":
             window.location.href = "index6.html";
             break;
-        case "congruencial-aditivo":
-            window.location.href = "index1.html";
+        case "1":
+            window.location.href = "index.html";
             break;
-        default:
-            titulo.textContent = "Seleccione un método";
     }
 }

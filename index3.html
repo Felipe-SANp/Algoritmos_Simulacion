@@ -3,22 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <link rel="stylesheet" href="Css/estilos.css">
     <link rel="shortcut icon" href="oswla.png">
     <title>Black Lion 2.0</title>
 </head>
 
 <body>
-    <div class="contenedor-primario">
-
-        <h2 id="titulo">Metodo Productos Medios</h2>
-
-        <div class="menu-opciones">
-            <button class="menu-boton" id="limpiarBtn" type="button">Limpiar</button>
-            <button class="menu-boton" id="exportarBtn" type="button">Exportar (png)</button>
+    <div class="menu-opciones">
+        <div class="menu-algoritmos">
+            <select id="algoritmo-selector" aria-label="Opciones" onchange="cambiarAlgoritmo()">
+                <option value="">Seleccionar Algoritmo</option>
+                <option value="2">Cuadrados Medios</option>
+                <option value="3" selected>Productos Medios</option>
+                <option value="4">Multiplicador Constante</option>
+                <option value="5">Congruencia Lineal</option>
+                <option value="6">Congruencial Multiplicativo</option>
+                <option value="1">Congruencial Aditivo</option>
+            </select>
         </div>
-
+        <button class="menu-boton" id="limpiarBtn" type="button">Limpiar</button>
+        <button class="menu-boton" id="exportarBtn" type="button">Exportar (png)</button>
+    </div>
+    <div class="contenedor-primario">
+        <h2 id="titulo">Metodo Productos Medios</h2>
         <div class="contenido_tabla">
             <div>
                 <div class="row-est" id="id-row-est" style="display: block;">
@@ -40,7 +48,7 @@
             </div>
         </div>
     </div>
-
+    <script src="js/menu_opciones.js"></script>
     <script src="js/productosMedios.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </body>

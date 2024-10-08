@@ -13,13 +13,13 @@
     <div class="menu-opciones">
         <div class="menu-algoritmos">
             <select id="algoritmo-selector" onchange="cambiarAlgoritmo()">
-                <option value="">Seleccionar Algoritmo</option>
-                <option value="cuadrados-medios">Cuadrados Medios</option>
-                <option value="productos-medios">Productos Medios</option>
-                <option value="multiplicador-constante">Multiplicador Constante</option>
-                <option value="lineal">Algoritmo Lineal</option>
-                <option value="congruencial-multiplicativo">Congruencial Multiplicativo</option>
-                <option value="congruencial-aditivo">Congruencial Aditivo</option>
+                <option value="" selected>Seleccionar Algoritmo</option>
+                <option value="2">Cuadrados Medios</option>
+                <option value="3">Productos Medios</option>
+                <option value="4">Multiplicador Constante</option>
+                <option value="5">Congruencia Lineal</option>
+                <option value="6">Congruencial Multiplicativo</option>
+                <option value="1">Congruencial Aditivo</option>
             </select>
         </div>
         <button class="menu-boton" id="limpiarBtn" type="button">Limpiar</button>
@@ -27,10 +27,8 @@
     </div>
 
     <div class="contenedor-primario">
-        <h2 id="titulo">Metodo Cuadrados Medios</h2>
-       
+        <h2 id="titulo">Seleccione un método</h2>
     </div>
-
     <script src="js/menu_opciones.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script>
