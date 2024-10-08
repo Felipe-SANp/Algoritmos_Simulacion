@@ -20,5 +20,8 @@ function cambiarAlgoritmo() {
         case "1":
             window.location.href = "index.html";
             break;
+        case "7":
+            window.location.href = "index7.html";
+            break;
     }
 }
