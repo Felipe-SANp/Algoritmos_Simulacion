@@ -84,7 +84,7 @@ var GeneradorColumnas = (function () {
             var fila = `
             <tr style="background-color: white;">
                 <td>X<sub>${k}</sub></td>
-                <td><input type="number" id="id-semilla${k}" placeholder=" semilla ${k}"></td>
+                <td><input type="number" id="id-semilla${k}" placeholder=" semilla ${k}" style="border: 1px solid #ffffff;"></td>
             </tr>`;
             document.getElementById('t01').innerHTML += fila;
         }

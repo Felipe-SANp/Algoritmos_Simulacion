@@ -33,7 +33,7 @@ td {
 }
 
 td {
-  border: 1px solid #d7d7d7;
+  border: 1px solid #717171;
 }
 
 th {
@@ -44,9 +44,9 @@ th {
 input {
   font-size: 15px;
   padding: 10px 8px;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   width: 90%;
-  border: 1px solid #ffffff;
+  /* border: 1px solid #ffffff; */
   margin-right: 10px;
   margin-left: 10px;
   text-align: center;
@@ -61,12 +61,9 @@ input {
   padding: 10px 15px;
   border-radius: 6px;
   /* border: 1px solid #ffffff; */
-  background-color: #2a58bd;
-  color: #ffffff;
+  /* background-color: #2a58bd; */
+  /* color: #ffffff; */
   cursor: pointer;
-}
-.menu-algoritmos select:hover {
-  background-color: #2a58bd;
 }
 
 .menu-opciones{
@@ -138,7 +135,7 @@ input {
 .contenedor-primario{
   border-radius: 20px;
   margin-top: 20px;
-  background-color: #dadada;
+  /* background-color: #dadada; */
   padding-bottom: 10px;
 
 }
