@@ -34,7 +34,7 @@ function congruencialMultiplicativo(X0, k, g) {
             <td>${a} * ${x_a}</td> <!-- valor de a * xi -->
             <td>${oper} MOD ${m}</td> <!-- valor (a * xi) MOD M -->
             <td>${Xi}</td> <!-- valor de xi -->
-            <td>${Xi}/${m-1}</td> <!-- valor de xi+1/M-1 -->
+            <td>${Xi} / ${m-1}</td> <!-- valor de xi+1/M-1 -->
             <td>${ri}<!-- valor de ri = xn+1 / M-1-->
         </tr> `;
             document.getElementById('t01').innerHTML += fila;
@@ -52,7 +52,7 @@ document.getElementById('generarDatosBtn').addEventListener('click', function() 
     var g = document.getElementById('id-g').value;
     
     document.getElementById('t01').innerHTML =
-    `<table id="t01" style="width: 580px; ">
+    `<table id="t01" style="width: 860px; ">
         <tr>
             <th>X<sub>i</sub></th> <!-- posicion de x -->
             <th>a * X<sub>i-1</sub></th> <!-- valor de a * xi -->

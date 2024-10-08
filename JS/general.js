@@ -108,7 +108,7 @@ var GeneradorDatos = (function () {
         }
 
         document.getElementById('t02').innerHTML =
-            `<table id="t02" style="width: 580px; ">
+            `<table id="t02" style="width: 860px; ">
                 <tr>
                     <th>X<sub>i</sub></th>
                     <th>X<sub>i+1</sub> + X<sub>i-n</sub></th>

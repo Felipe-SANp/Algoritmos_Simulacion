@@ -48,7 +48,7 @@ document.getElementById('generarDatosBtn').addEventListener('click', function() 
     var n = document.getElementById('id-n').value;
 
     document.getElementById('t01').innerHTML =
-    `<table id="t01" style="width: 580px; ">
+    `<table id="t01" style="width: 860px; ">
         <tr>
             <th>X<sub>n</sub></th> <!-- posicion de x -->
             <th>X<sub>i</sub></th> <!-- valor de primer x -->

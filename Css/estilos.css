@@ -33,12 +33,13 @@ td {
 }
 
 td {
-  border: 1px solid #717171;
+  border: 1px solid #5c6bd9
 }
 
 th {
-  background-color: #535743;
+  background-color: #103e58;
   color: white;
+  border: 1px solid #99b6e1;
 }
 
 input {
@@ -115,9 +116,14 @@ input {
 
 .caja-gen {
   display: flex;
+  flex-direction: column;
   padding-bottom: 20px;
 }
-
+.caja-gen-2 {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
+}
 .row {
   display: flex;
 }
@@ -142,7 +148,7 @@ input {
 
 .row-est {
   display: inline;
-  width: 580px;
+  width: 860px;
   margin-right: 20px;
 }
 
