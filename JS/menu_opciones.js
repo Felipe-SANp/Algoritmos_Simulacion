@@ -25,3 +25,15 @@ function cambiarAlgoritmo() {
             break;
     }
 }
+// funcion para poder exportar la tabla en una imagen png 
+function exportarDatos() {
+    html2canvas(document.getElementById('t01'), {
+        onrendered: function (canvas) {
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'semillas.png';
+            link.click();
+        }
+    });
+}
+document.getElementById("exportarBtn").addEventListener("click", exportarDatos);

@@ -189,7 +189,7 @@ var GeneradorDatos = (function () {
 })();
 
 // Eventos de botones
-document.getElementById("exportarBtn").addEventListener("click", Menu.exportarDatos);
+document.getElementById("exportarBtn_").addEventListener("click", Menu.exportarDatos);
 document.getElementById("limpiarBtn").addEventListener("click", Menu.limpiarDatos);
 document.getElementById("generarColumnasBtn").addEventListener("click", GeneradorColumnas.generarColumnas);
 document.getElementById("generarDatosBtn").addEventListener("click", GeneradorDatos.generarDatos);
