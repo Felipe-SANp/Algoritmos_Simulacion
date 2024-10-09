@@ -1,20 +1,27 @@
 // Función para generar números pseudoaleatorios usando el método de cuadrados medios
-function cuadradosMedios(semilla, iteraciones) {
-    
+function cuadradosMedios(semilla, n) {
     let D = semilla.toString().length; // Número de dígitos de la semilla
     let X = semilla;
     let X_a = semilla;
-    let a = 0;
-    
-    for (let i = 0; i < iteraciones; i++) {
+    let XnMap = {}; // Mapa para rastrear los números generados
+
+    let i = 0;
+    while (true) {
         let Y = X * X; // Elevar la semilla al cuadrado
-        let YStr = Y.toString().padStart(2 * D, '0'); // Asegurarse de tener 2*D dígitos (rellenar con ceros)
+        let YStr = Y.toString();
         X_a = X;
+        
+        // Asegurarse de tener 2*D dígitos (rellenar con ceros)
+        if(D % 2 == 0 && YStr.length % 2 != 0){
+            YStr = YStr.padStart(YStr.length + 1, '0');
+        }
+        if(D % 2 == 1 && YStr.length % 2 != 1){
+            YStr = YStr.padStart(YStr.length + 1, '0');
+        }
         
         // Extraer los D dígitos del centro
         let centro = Math.floor(YStr.length / 2);
         let inicio = Math.max(0, centro - Math.floor(D / 2));
-
         let Xn = YStr.substring(inicio, inicio + D);
         
         // Generar el número pseudoaleatorio entre 0 y 1
@@ -22,6 +29,10 @@ function cuadradosMedios(semilla, iteraciones) {
 
         // Actualizar la semilla
         X = parseInt(Xn);
+
+        if(XnMap[Xn] || (n != null && i >= n)){
+            break;
+        }
 
         const fila = `
         <tr style="background-color: white;">
@@ -31,13 +42,18 @@ function cuadradosMedios(semilla, iteraciones) {
             <td>${Xn}</td> <!-- valor de x extraido los 4 digitos-->
             <td>${rn}</td> <!-- valor de r -->
         </tr> `;
-            document.getElementById('t01').innerHTML += fila;
+        document.getElementById('t01').innerHTML += fila;
+        
+        // Agregar Xn al mapa
+        XnMap[Xn] = true;
+
+        i++;
     }
 }
 
 document.getElementById('generarDatosBtn').addEventListener('click', function() {
     var semilla = document.getElementById('id-semilla').value;
-    var n = document.getElementById('id-n').value;
+    var n = parseInt(document.getElementById('id-n').value);
 
     document.getElementById('t01').innerHTML =
     `<table id="t01" style="width: 860px; ">
