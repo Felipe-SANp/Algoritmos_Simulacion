@@ -11,11 +11,8 @@ function cuadradosMedios(semilla, n) {
         let YStr = Y.toString();
         X_a = X;
         
-        // Asegurarse de tener 2*D dígitos (rellenar con ceros)
-        if(D % 2 == 0 && YStr.length % 2 != 0){
-            YStr = YStr.padStart(YStr.length + 1, '0');
-        }
-        if(D % 2 == 1 && YStr.length % 2 != 1){
+        // Asegurarse de tener los dígitos (rellenar con ceros)
+        if(D % 2 == 0 && YStr.length % 2 != 0 || (D % 2 == 1 && YStr.length % 2 != 1)){
             YStr = YStr.padStart(YStr.length + 1, '0');
         }
         
@@ -54,6 +51,11 @@ function cuadradosMedios(semilla, n) {
 document.getElementById('generarDatosBtn').addEventListener('click', function() {
     var semilla = document.getElementById('id-semilla').value;
     var n = parseInt(document.getElementById('id-n').value);
+
+    if(semilla == '' || semilla.length <= 3){
+        alert('Ingrese la semilla.\n * Un número entero positivo de mas de 3 dígitos.');
+        return;
+    }
 
     document.getElementById('t01').innerHTML =
     `<table id="t01" style="width: 860px; ">
