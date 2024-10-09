@@ -10,29 +10,47 @@ function cuadradosMedios(semilla, n) {
         let Y = X * X; // Elevar la semilla al cuadrado
         let YStr = Y.toString();
         X_a = X;
-        
+
         // Asegurarse de tener los dígitos (rellenar con ceros)
-        if(D % 2 == 0 && YStr.length % 2 != 0 || (D % 2 == 1 && YStr.length % 2 != 1)){
+        if (D % 2 == 0 && YStr.length % 2 != 0 || (D % 2 == 1 && YStr.length % 2 != 1)) {
             YStr = YStr.padStart(YStr.length + 1, '0');
         }
-        
+
         // Extraer los D dígitos del centro
         let centro = Math.floor(YStr.length / 2);
         let inicio = Math.max(0, centro - Math.floor(D / 2));
         let Xn = YStr.substring(inicio, inicio + D);
-        
+
         // Generar el número pseudoaleatorio entre 0 y 1
         let rn = `0.${Xn}`;
 
         // Actualizar la semilla
         X = parseInt(Xn);
 
-        if(XnMap[Xn] || (n != null && i >= n)){
+        if (XnMap.hasOwnProperty(Xn)) {
+            alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[Xn] +
+                ' y el siguiente valor X' + i +
+                '\n * se detiene la generación de números');
+
+            const fila = `
+            <tr id="result${i}" style="background-color:red; color:white;">
+                <td>X<sub>${i}</sub></td> <!-- posicion de x -->
+                <td>${X_a}</td> <!-- valor de x -->
+                <td>${Y}</td> <!-- valor de x^2 -->
+                <td>${Xn}</td> <!-- valor de x extraido los 4 digitos-->
+                <td>${rn}</td> <!-- valor de r -->
+            </tr> `;
+            document.getElementById('t01').innerHTML += fila;
+            document.getElementById('result' + XnMap[Xn]).style.color = "white";
+            document.getElementById('result' + XnMap[Xn]).style.background = "blue";
+            break;
+        }
+        if (n != null && i >= n) {
             break;
         }
 
         const fila = `
-        <tr style="background-color: white;">
+        <tr id="result${i}" style="background-color: white;">
             <td>X<sub>${i}</sub></td> <!-- posicion de x -->
             <td>${X_a}</td> <!-- valor de x -->
             <td>${Y}</td> <!-- valor de x^2 -->
@@ -40,25 +58,25 @@ function cuadradosMedios(semilla, n) {
             <td>${rn}</td> <!-- valor de r -->
         </tr> `;
         document.getElementById('t01').innerHTML += fila;
-        
+
         // Agregar Xn al mapa
-        XnMap[Xn] = true;
+        XnMap[Xn] = i;
 
         i++;
     }
 }
 
-document.getElementById('generarDatosBtn').addEventListener('click', function() {
+document.getElementById('generarDatosBtn').addEventListener('click', function () {
     var semilla = document.getElementById('id-semilla').value;
     var n = parseInt(document.getElementById('id-n').value);
 
-    if(semilla == '' || semilla.length <= 3){
+    if (semilla == '' || semilla.length <= 3) {
         alert('Ingrese la semilla.\n * Un número entero positivo de mas de 3 dígitos.');
         return;
     }
 
     document.getElementById('t01').innerHTML =
-    `<table id="t01" style="width: 860px; ">
+        `<table id="t01" style="width: 860px; ">
         <tr>
             <th>X<sub>n</sub></th> <!-- posicion de x -->
             <th>X<sub>i</sub></th> <!-- valor de x -->
