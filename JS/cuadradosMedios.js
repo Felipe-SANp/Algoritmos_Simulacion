@@ -33,7 +33,7 @@ function cuadradosMedios(semilla, n) {
                 '\n * se detiene la generación de números');
 
             const fila = `
-            <tr id="result${i}" style="background-color:red; color:white;">
+            <tr id="result${i}" style="background-color:gray; color:white;">
                 <td>X<sub>${i}</sub></td> <!-- posicion de x -->
                 <td>${X_a}</td> <!-- valor de x -->
                 <td>${Y}</td> <!-- valor de x^2 -->
@@ -42,8 +42,8 @@ function cuadradosMedios(semilla, n) {
             </tr> `;
             document.getElementById('t01').innerHTML += fila;
             document.getElementById('result' + XnMap[X_a]).style.color = "white";
-            document.getElementById('result' + XnMap[X_a]).style.background = "blue";
-            // break;
+            document.getElementById('result' + XnMap[X_a]).style.background = "rgb(137 137 137)";
+            break;
         }
         if (n != null && i >= n) {
             break;
