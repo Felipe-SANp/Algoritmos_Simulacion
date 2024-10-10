@@ -27,9 +27,9 @@ function cuadradosMedios(semilla, n) {
         // Actualizar la semilla
         X = parseInt(Xn);
 
-        if (XnMap.hasOwnProperty(Xn)) {
-            alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[Xn] +
-                ' y el siguiente valor X' + i +
+        if (XnMap.hasOwnProperty(X_a)) {
+            alert('Algoritmo terminado.\n * Se encontró semillas duplicadas' + XnMap[X_a] +
+                ' y X' + i +
                 '\n * se detiene la generación de números');
 
             const fila = `
@@ -41,9 +41,9 @@ function cuadradosMedios(semilla, n) {
                 <td>${rn}</td> <!-- valor de r -->
             </tr> `;
             document.getElementById('t01').innerHTML += fila;
-            document.getElementById('result' + XnMap[Xn]).style.color = "white";
-            document.getElementById('result' + XnMap[Xn]).style.background = "blue";
-            break;
+            document.getElementById('result' + XnMap[X_a]).style.color = "white";
+            document.getElementById('result' + XnMap[X_a]).style.background = "blue";
+            // break;
         }
         if (n != null && i >= n) {
             break;
@@ -60,7 +60,7 @@ function cuadradosMedios(semilla, n) {
         document.getElementById('t01').innerHTML += fila;
 
         // Agregar Xn al mapa
-        XnMap[Xn] = i;
+        XnMap[X_a] = i;
 
         i++;
     }

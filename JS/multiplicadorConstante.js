@@ -1,6 +1,6 @@
 // Función para obtener los D dígitos del centro de un número
 function obtenerDigitosCentrales(numero, D) {
-    let numStr = numero.toString().padStart(2 * D, '0');  // Asegurarse de tener al menos 2*D dígitos
+    let numStr = numero.toString();  // Asegurarse que tenga al menos 2*D dígitos
     let inicio = Math.floor((numStr.length - D) / 2);
     return parseInt(numStr.substring(inicio, inicio + D));
 }
@@ -8,42 +8,78 @@ function obtenerDigitosCentrales(numero, D) {
 // Algoritmo de multiplicador constante
 function multiplicadorConstante(X0, a, n) {
     let D = X0.toString().length;  // Número de dígitos de la semilla
-    let numerosPseudoaleatorios = [];
+    let XnMap = {};  // Usar un objeto para almacenar los valores de Xn y evitar duplicados
     let x_a = 0;
+    let i = 0;
 
-    for (let i = 0; i < n; i++) {
+    while (true) {
         let Y = X0 * a;  // Multiplicar la semilla por la constante
+        let Ystr = X0.toString() + a.toString();
+        if (D % 2 == 0 && Y.toString().length % 2 != 0 || (D % 2 == 1 && Y.toString().length % 2 != 1)) {
+            Y = Y.toString().padStart(Y.toString().length + 1, '0');
+        }
+
         let X1 = obtenerDigitosCentrales(Y, D);  // Obtener los D dígitos del centro
         let ri = X1 / Math.pow(10, D);  // Generar el número pseudoaleatorio
-
-        numerosPseudoaleatorios.push(ri);  // Almacenar el número generado
 
         // almacenar el valor de la semilla actual
         x_a = X0;
 
         // Actualizar la semilla para la siguiente iteración
-        X0 = X1;
+        X0 = parseInt(X1);
+
+        if (XnMap.hasOwnProperty(X0)) {  // Verificar si el valor ya ha sido generado antes
+            const fila = `
+            <tr style="background-color: red; color: white;">
+                <td>X<sub>${i}</sub></td> <!-- posicion de x -->
+                <td>${a} * ${x_a}</td> <!-- representacion de multiplicacion -->
+                <td>${Y}</td> <!-- valor de multiplicacion -->
+                <td>${X0}</td> <!-- valor de xi+1 -->
+                <td>${ri}</td> <!-- valor de r -->
+            </tr> `;
+            document.getElementById('t01').innerHTML += fila;
+            document.getElementById('result' + XnMap[X0]).style.background = "blue";
+            document.getElementById('result' + XnMap[X0]).style.color = "white";
+
+            alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[X0] +
+                ' e X' + i +
+                '\n * se detiene la generación de números');
+            break;
+        }
+
+        if (n != null && i >= n) {
+            break;
+        }
 
         const fila = `
-        <tr style="background-color: white;">
+        <tr id="result${i}" style="background-color: white;">
             <td>X<sub>${i}</sub></td> <!-- posicion de x -->
-            <td>${a} * ${x_a}</td> <!-- representacion de mulpicacion -->
-            <td>${Y}</td> <!-- valor de mulpicacion -->
-            <td>${X0}</sub></sub></td> <!-- valor de xi+1 -->
+            <td>${a} * ${x_a}</td> <!-- representacion de multiplicacion -->
+            <td>${Y}</td> <!-- valor de multiplicacion -->
+            <td>${X0}</td> <!-- valor de xi+1 -->
             <td>${ri}</td> <!-- valor de r -->
         </tr> `;
-            document.getElementById('t01').innerHTML += fila;
-    }
+        document.getElementById('t01').innerHTML += fila;
 
-    return numerosPseudoaleatorios;
+        // almacenamos la semilla con el indice i en XnMap
+        XnMap[X0] = i;  // Usamos X0 como clave en el objeto XnMap para evitar duplicados
+        i++;
+    }
 }
-document.getElementById('generarDatosBtn').addEventListener('click', function() {
+
+document.getElementById('generarDatosBtn').addEventListener('click', function () {
     var semilla = document.getElementById('id-semilla').value;
     var constante = document.getElementById('id-constante').value;
-    var n = document.getElementById('id-n').value;
+    var n = parseInt(document.getElementById('id-n').value);
+
+    // validar si semilla e constante tiene la misma longitud sea > 3
+    if (semilla == '' || semilla.length <= 3 || constante == '' || constante.length <= 3 || semilla.length != constante.length) {
+        alert('Ingrese la semilla y constante\n * Un número entero positivo de mas de 3 dígitos\n * Misma longitud entre los valores.');
+        return;
+    }
 
     document.getElementById('t01').innerHTML =
-    `<table id="t01" style="width: 860px; ">
+        `<table id="t01" style="width: 860px; ">
         <tr>
             <th>X<sub>n</sub></th> <!-- posicion de x -->
             <th>a * X<sub>i</sub></th> <!-- representacion de mulpicacion -->

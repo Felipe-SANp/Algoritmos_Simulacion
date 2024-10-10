@@ -69,7 +69,7 @@ var GeneradorColumnas = (function () {
 
         // Validación de la semilla
         if (!Validacion.validarSemilla(semilla)) {
-            alert("Por favor llene todos los campos de forma correcta.");
+            alert("La semilla debe ser un número entero positivo");
             return;
         }
 
@@ -132,7 +132,7 @@ var GeneradorDatos = (function () {
     function ejecutarAlgoritmo(semillas, m, n) {
         const buffer = new Array(semillas.length);
         const conjunto = new Set();
-        const mapValores = new Map(); 
+        const mapValores = new Map();
 
         for (let i = 0; i < semillas.length; i++) {
             buffer[i] = Number(semillas[i]);
@@ -140,7 +140,7 @@ var GeneradorDatos = (function () {
         }
 
         let i = semillas.length;
-        let a = 0; 
+        let a = 0;
         while (true) {
             const x_i_n = buffer[i - 1] + buffer[i - semillas.length];
             const nuevoValor = x_i_n % m;
@@ -149,24 +149,30 @@ var GeneradorDatos = (function () {
             if (conjunto.has(result)) {
                 const index = parseInt(mapValores.get(result));
                 const fila = `
-                    <tr style="background-color: white; color:red;">
+                    <tr style="background-color: red; color:white;">
                         <td>X<sub>${i + 1}</sub></td>
                         <td>${buffer[i - 1]} + ${buffer[i - semillas.length]}</td>
                         <td>${x_i_n} mod ${m}</td>
                         <td>${result}</td>
                     </tr>`;
-                document.getElementById('result'+index).style.color = "blue";
+                document.getElementById('result' + index).style.background = "blue";
+                document.getElementById('result' + index).style.color = "white";
                 document.getElementById('t02').innerHTML += fila;
+
+                alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + (index + semillas.length + 1) +
+                    ' e X' + (i + 1) +
+                    '\n * se detiene la generación de números');
+
                 break;
             }
 
-            if(n != null && i >= semillas.length + n){
+            if (n != null && i >= semillas.length + n) {
                 break;
             }
 
             buffer.push(nuevoValor);
             conjunto.add(result);
-            mapValores.set(result, a); 
+            mapValores.set(result, a);
 
             const fila = `
             <tr id="result${a}" style="background-color: white;">
