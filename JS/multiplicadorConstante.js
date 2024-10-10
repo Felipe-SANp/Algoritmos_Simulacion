@@ -14,7 +14,6 @@ function multiplicadorConstante(X0, a, n) {
 
     while (true) {
         let Y = X0 * a;  // Multiplicar la semilla por la constante
-        let Ystr = X0.toString() + a.toString();
         if (D % 2 == 0 && Y.toString().length % 2 != 0 || (D % 2 == 1 && Y.toString().length % 2 != 1)) {
             Y = Y.toString().padStart(Y.toString().length + 1, '0');
         }
@@ -28,7 +27,7 @@ function multiplicadorConstante(X0, a, n) {
         // Actualizar la semilla para la siguiente iteración
         X0 = parseInt(X1);
 
-        if (XnMap.hasOwnProperty(X0)) {  // Verificar si el valor ya ha sido generado antes
+        if (XnMap.hasOwnProperty(x_a)) {  // Verificar si el valor ya ha sido generado antes
             const fila = `
             <tr style="background-color: red; color: white;">
                 <td>X<sub>${i}</sub></td> <!-- posicion de x -->
@@ -38,10 +37,10 @@ function multiplicadorConstante(X0, a, n) {
                 <td>${ri}</td> <!-- valor de r -->
             </tr> `;
             document.getElementById('t01').innerHTML += fila;
-            document.getElementById('result' + XnMap[X0]).style.background = "blue";
-            document.getElementById('result' + XnMap[X0]).style.color = "white";
+            document.getElementById('result' + XnMap[x_a]).style.background = "blue";
+            document.getElementById('result' + XnMap[x_a]).style.color = "white";
 
-            alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[X0] +
+            alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[x_a] +
                 ' e X' + i +
                 '\n * se detiene la generación de números');
             break;
@@ -62,7 +61,7 @@ function multiplicadorConstante(X0, a, n) {
         document.getElementById('t01').innerHTML += fila;
 
         // almacenamos la semilla con el indice i en XnMap
-        XnMap[X0] = i;  // Usamos X0 como clave en el objeto XnMap para evitar duplicados
+        XnMap[x_a] = i;  // Usamos X0 como clave en el objeto XnMap para evitar duplicados
         i++;
     }
 }

@@ -34,7 +34,7 @@ function productosMedios(X0, X1, n) {
 
         if (XnMap.hasOwnProperty(X2)) {
             const fila = `
-            <tr style="background-color: red; color: white ;">
+            <tr style="background-color: gray; color: white ;">
                 <td>X<sub>${i}</sub></td> <!-- posicion de x -->
                 <td>${x0}</td> <!-- valor de primer x -->
                 <td>${x1}</td> <!-- valor de segundo x -->
@@ -43,7 +43,7 @@ function productosMedios(X0, X1, n) {
                 <td>${ri}</td> <!-- valor de r -->
             </tr> `;
             document.getElementById('result' + XnMap[X2]).style.color = "white";
-            document.getElementById('result' + XnMap[X2]).style.background = "blue";
+            document.getElementById('result' + XnMap[X2]).style.background = "rgb(137 137 137)";
             document.getElementById('t01').innerHTML += fila;
             alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[X2] +
                 ' y el último valor X' + i +
@@ -78,7 +78,7 @@ document.getElementById('generarDatosBtn').addEventListener('click', function ()
 
 
     if (n == '' || n <= 0) {
-        alert("eeeeee");
+        alert("Valor no valido para N\n * Ingrese un valor entero positivo para n");
         return;
     }
     // validar semillas, con longitud > 3, y ambas de la misma longitud
