@@ -28,9 +28,7 @@ function cuadradosMedios(semilla, n) {
         X = parseInt(Xn);
 
         if (XnMap.hasOwnProperty(X_a)) {
-            alert('Algoritmo terminado.\n * Se detectó un bucle entre ' + XnMap[X_a] +
-                ' y X' + i +
-                '\n * se detiene la generación de números');
+            alertBlucle(XnMap[X_a], i);
             
             document.getElementById('t01').innerHTML += filaParametros(i, X_a, Y, Xn, rn);
             styleID('result' + XnMap[X_a]);
@@ -55,29 +53,24 @@ document.getElementById('generarDatosBtn').addEventListener('click', function ()
     var semilla = parseInt(document.getElementById('id-semilla').value);
     var n = parseInt(document.getElementById('id-n').value);
 
-    if (semilla == '' || isNaN(semilla)  ||semilla.toString().length <= 3) {
+    if (isNaN(semilla) ||semilla.toString().length <= 3) {
         alert('Ingrese la semilla.\n * Un número entero positivo de mas de 3 dígitos.');
         return;
     }
 
     document.getElementById('t01').innerHTML =
-        `<table id="t01" style="width: 860px; ">
-            <tr>
-                <th>X<sub>n</sub></th> <!-- posicion de x -->
-                <th>X<sub>i</sub></th> <!-- valor de x -->
-                <th>X<sub>i</sub><sup>2</sup></th> <!-- valor de x^2 -->
-                <th>X<sub>i</sub></th> <!-- valor de x extraido los 4 digitos-->
-                <th>r<sub>i</sub></th> <!-- valor de r -->
-            </tr>
-        </table>`;
+    `<table id="t01" style="width: 860px; ">
+        <tr>
+            <th>X<sub>n</sub></th> <!-- posicion de x -->
+            <th>X<sub>i</sub></th> <!-- valor de x -->
+            <th>X<sub>i</sub><sup>2</sup></th> <!-- valor de x^2 -->
+            <th>X<sub>i</sub></th> <!-- valor de x extraido los 4 digitos-->
+            <th>r<sub>i</sub></th> <!-- valor de r -->
+        </tr>
+    </table>`;
 
     cuadradosMedios(semilla, n);
 });
-
-function styleID(id){
-    document.getElementById(id).style.color = "white";
-    document.getElementById(id).style.background = "gray";
-}
 
 function filaParametros(i, X_a, Y, Xn, rn){
     return `

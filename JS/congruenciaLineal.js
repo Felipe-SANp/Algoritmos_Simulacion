@@ -24,9 +24,9 @@ function primoMasCercano(m) {
 // Función para generar números pseudoaleatorios usando el algoritmo de congruencia lineal
 function congruenciaLineal(X0, k, g) {
     let x_a = 0;
-    let m = Math.pow(2, g);  // m = 2^g
-    let n = m;             // N = m = 2^g
-    let a = 1 + 4 * k;       // a = 1 + 4k
+    let m = Math.pow(2, g);     // m = 2^g
+    let n = m;                  // N = m = 2^g
+    let a = 1 + 4 * k;          // a = 1 + 4k
     let c = primoMasCercano(m); // Seleccionamos primo mas cercano a m
     let numerosPseudoaleatorios = [];
     let Xi = X0;  // Semilla inicial
@@ -39,12 +39,12 @@ function congruenciaLineal(X0, k, g) {
     
     for (let i = 0; i < n; i++) {
         let oper = a * Xi + c;  // Operación a * Xi + c
-        
-        // almacenar xi antes de que se modifique
-        x_a = Xi;
+        x_a = Xi; // almacenar xi antes de que se modifique
         Xi = oper % m;  // Fórmula de congruencia lineal
         let ri = Xi / (m - 1);  // Normalizar el valor entre 0 y 1
-        numerosPseudoaleatorios.push(ri);  // Almacenar el número generado
+        
+        // Almacenar el número generado
+        numerosPseudoaleatorios.push(ri);  
 
         document.getElementById('t01').innerHTML += filaParametros2(a, i, x_a, c, m, oper, Xi, ri);
     }
@@ -92,6 +92,8 @@ function limpiarDatos() {
     document.getElementById('id-k').value = '';
     document.getElementById('id-g').value = '';
     document.getElementById('t01').innerHTML = '';
+    document.getElementById('t02').innerHTML = '';
+    document.getElementById('t02').style.display = "none";
 }
 
 function filaParametros(a,c,n,m){

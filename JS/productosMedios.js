@@ -3,17 +3,15 @@ function obtenerDigitosCentrales(numero, D) {
     let numStr = numero.toString();  // Asegurarse que tenga al menos 2*D dígitos
     let inicio = Math.floor((numStr.length - D) / 2);
     return parseInt(numStr.substring(inicio, inicio + D));
-
 }
 
 // Algoritmo de productos medios
 function productosMedios(X0, X1, n) {
     let D = X0.toString().length;  // Número de dígitos de la semilla
-    let XnMap = {}; // Mapa para rastrear los números generados
     let x0 = 0;
     let x1 = 0;
     let i = 0;
-    while (true) {
+    for (let i = 0; i < n; i++) {
         let Y = X0 * X1;  // Multiplicar las dos semillas
 
         if (D % 2 == 0 && Y.toString().length % 2 != 0 || (D % 2 == 1 && Y.toString().length % 2 != 1)) {
@@ -21,7 +19,6 @@ function productosMedios(X0, X1, n) {
         }
 
         let X2 = obtenerDigitosCentrales(Y, D);  // Obtener los D dígitos del centro
-
         let ri = X2 / Math.pow(10, D);  // Generar el número pseudoaleatorio
 
         // guardar valores de x0 y x1
@@ -31,45 +28,15 @@ function productosMedios(X0, X1, n) {
         // Actualizar las semillas para la siguiente iteración
         X0 = X1;
         X1 = X2;
-
-        if (XnMap.hasOwnProperty(X2)) {
-            const fila = `
-            <tr style="background-color: gray; color: white ;">
-                <td>X<sub>${i}</sub></td> <!-- posicion de x -->
-                <td>${x0}</td> <!-- valor de primer x -->
-                <td>${x1}</td> <!-- valor de segundo x -->
-                <td>${Y}</td> <!-- valor de producto -->
-                <td>${X2}</td> <!-- valor de x extraido los 4 digitos-->
-                <td>${ri}</td> <!-- valor de r -->
-            </tr> `;
-            document.getElementById('result' + XnMap[X2]).style.color = "white";
-            document.getElementById('result' + XnMap[X2]).style.background = "rgb(137 137 137)";
-            document.getElementById('t01').innerHTML += fila;
-            alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[X2] +
-                ' y el último valor X' + i +
-                '\n * se detiene la generación de números');
-            break;
-        }
-
+       
         if (n != null && i >= n) {
             break;
         }
-
-        const fila = `
-        <tr id ="result${i}" style="background-color: white;">
-            <td>X<sub>${i}</sub></td> <!-- posicion de x -->
-            <td>${x0}</td> <!-- valor de primer x -->
-            <td>${x1}</td> <!-- valor de segundo x -->
-            <td>${Y}</td> <!-- valor de producto -->
-            <td>${X2}</td> <!-- valor de x extraido los 4 digitos-->
-            <td>${ri}</td> <!-- valor de r -->
-        </tr> `;
-        document.getElementById('t01').innerHTML += fila;
-
-        XnMap[X2] = i;  // Almacenar el número generado
-        i++;
+        // Agregar fila a la tabla de resultados
+        document.getElementById('t01').innerHTML += filaParametros(i, x0, x1, Y, X2, ri);
     }
 }
+
 // TODO: Validar que las semillas sean de la misma longitud
 document.getElementById('generarDatosBtn').addEventListener('click', function () {
     var semilla = parseInt(document.getElementById('id-semilla').value);
@@ -77,21 +44,18 @@ document.getElementById('generarDatosBtn').addEventListener('click', function ()
     var n = parseInt(document.getElementById('id-n').value);
     
     // validar semillas, con longitud > 3, y ambas de la misma longitud
-    if (isNaN(semilla) || semilla.toString().length <= 3 ||  
-        isNaN(semilla2) || semilla2.toString().length <= 3 || 
-        semilla.toString().length != semilla2.toString().length) {
-        
+    if (validarDatos(semilla, semilla2)) {
             alert('Ingrese la semilla.\n * Un número entero positivo de mas de 3 dígitos\n * Misma longitud entre las semillas.');
         return;
-    }
+    }  
 
-    if ( isNaN(n) || n <= 0) {
+    if (isNaN(n) || n <= 0) {
         alert("Valor no valido para N\n * Ingrese un valor entero positivo para n");
         return;
     }
 
     document.getElementById('t01').innerHTML =
-        `<table id="t01" style="width: 860px; ">
+    `<table id="t01" style="width: 860px; ">
         <tr>
             <th>X<sub>n</sub></th> <!-- posicion de x -->
             <th>X<sub>i</sub></th> <!-- valor de primer x -->
@@ -104,6 +68,24 @@ document.getElementById('generarDatosBtn').addEventListener('click', function ()
 
     productosMedios(semilla, semilla2, n);
 });
+
+function validarDatos(semilla, semilla2) {
+    return isNaN(semilla) || isNaN(semilla2) || 
+        semilla.toString().length <= 3 || semilla2.toString().length <= 3 || 
+        semilla.toString().length != semilla2.toString().length;
+}
+
+function filaParametros(i, x0, x1, Y, X2, ri) {
+    return `
+    <tr id ="result${i}" style="background-color: white;">
+        <td>X<sub>${i}</sub></td> <!-- posicion de x -->
+        <td>${x0}</td> <!-- valor de primer x -->
+        <td>${x1}</td> <!-- valor de segundo x -->
+        <td>${Y}</td> <!-- valor de producto -->
+        <td>${X2}</td> <!-- valor de x extraido los 4 digitos-->
+        <td>${ri}</td> <!-- valor de r -->
+    </tr> `;
+}
 
 function limpiarDatos() {
     document.getElementById('t01').innerHTML = '';

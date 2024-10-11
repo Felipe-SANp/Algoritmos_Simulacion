@@ -36,4 +36,25 @@ function exportarDatos() {
         }
     });
 }
+function exportarDatos2() {
+    html2canvas(document.getElementById('t02'), {
+        onrendered: function (canvas) {
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'semillas.png';
+            link.click();
+        }
+    });
+}
+// funcion dar otro estilo a una fila por id 
+function styleID(id) {
+    document.getElementById(id).style.color = "white";
+    document.getElementById(id).style.background = "gray";
+}
+
+function alertBlucle(index, index_2){
+    alert('Algoritmo terminado.\n * Se encontró un bucle entre X' + index +' y X' + index_2 +'\n * se detiene la generación de números');
+}
+
 document.getElementById("exportarBtn").addEventListener("click", exportarDatos);
+// document.getElementById("exportarBtn_").addEventListener("click", exportarDatos2);

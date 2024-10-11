@@ -28,21 +28,13 @@ function multiplicadorConstante(X0, a, n) {
         X0 = parseInt(X1);
 
         if (XnMap.hasOwnProperty(x_a)) {  // Verificar si el valor ya ha sido generado antes
-            const fila = `
-            <tr style="background-color: gray; color: white;">
-                <td>X<sub>${i}</sub></td> <!-- posicion de x -->
-                <td>${a} * ${x_a}</td> <!-- representacion de multiplicacion -->
-                <td>${Y}</td> <!-- valor de multiplicacion -->
-                <td>${X0}</td> <!-- valor de xi+1 -->
-                <td>${ri}</td> <!-- valor de r -->
-            </tr> `;
-            document.getElementById('t01').innerHTML += fila;
-            document.getElementById('result' + XnMap[x_a]).style.background = "rgb(137 137 137)";
-            document.getElementById('result' + XnMap[x_a]).style.color = "white";
-
             alert('Algoritmo terminado.\n * Se detectó un bucle entre X' + XnMap[x_a] +
                 ' e X' + i +
                 '\n * se detiene la generación de números');
+            
+            document.getElementById('t01').innerHTML += filaParametros(i, a, x_a, Y, X0, ri);
+            styleID('result' + XnMap[x_a]);
+            styleID('result' + i);
             break;
         }
 
@@ -50,15 +42,7 @@ function multiplicadorConstante(X0, a, n) {
             break;
         }
 
-        const fila = `
-        <tr id="result${i}" style="background-color: white;">
-            <td>X<sub>${i}</sub></td> <!-- posicion de x -->
-            <td>${a} * ${x_a}</td> <!-- representacion de multiplicacion -->
-            <td>${Y}</td> <!-- valor de multiplicacion -->
-            <td>${X0}</td> <!-- valor de xi+1 -->
-            <td>${ri}</td> <!-- valor de r -->
-        </tr> `;
-        document.getElementById('t01').innerHTML += fila;
+        document.getElementById('t01').innerHTML += filaParametros(i, a, x_a, Y, X0, ri);
 
         // almacenamos la semilla con el indice i en XnMap
         XnMap[x_a] = i;  // Usamos X0 como clave en el objeto XnMap para evitar duplicados
@@ -72,9 +56,7 @@ document.getElementById('generarDatosBtn').addEventListener('click', function ()
     var n = parseInt(document.getElementById('id-n').value);
 
     // validar si semilla e constante tiene la misma longitud sea > 3
-    if (isNaN(semilla) || semilla.toString().length <= 3 || 
-        isNaN(constante) || constante.toString().length <= 3 || 
-        semilla.toString().length != constante.toString().length) {
+    if (validarDatos(semilla, constante)) {
         alert('Ingrese la semilla y constante\n * Un número entero positivo de mas de 3 dígitos\n * Misma longitud entre los valores.');
         return;
     }
@@ -87,17 +69,34 @@ document.getElementById('generarDatosBtn').addEventListener('click', function ()
 
     document.getElementById('t01').innerHTML =
         `<table id="t01" style="width: 860px; ">
-        <tr>
-            <th>X<sub>n</sub></th> <!-- posicion de x -->
-            <th>a * X<sub>i</sub></th> <!-- representacion de mulpicacion -->
-            <th>x<sub>i+1</th> <!-- valor de mulpicacion -->
-            <th>producto</th> <!-- valor de xi+1 -->
-            <th>r<sub>i</sub></th> <!-- valor de r -->
-        </tr>
-    </table>`;
+            <tr>
+                <th>X<sub>n</sub></th> <!-- posicion de x -->
+                <th>a * X<sub>i</sub></th> <!-- representacion de mulpicacion -->
+                <th>x<sub>i+1</th> <!-- valor de mulpicacion -->
+                <th>producto</th> <!-- valor de xi+1 -->
+                <th>r<sub>i</sub></th> <!-- valor de r -->
+            </tr>
+        </table>`;
 
     multiplicadorConstante(semilla, constante, n);
 });
+
+function validarDatos(semilla, constante) {
+    return isNaN(semilla) || semilla.toString().length <= 3 || 
+        isNaN(constante) || constante.toString().length <= 3 || 
+        semilla.toString().length != constante.toString().length;
+}
+
+function filaParametros(i, a, x_a, Y, X0, ri) {
+    return `
+    <tr id="result${i}" style="background-color: white;">
+        <td>X<sub>${i}</sub></td> <!-- posicion de x -->
+        <td>${a} * ${x_a}</td> <!-- representacion de multiplicacion -->
+        <td>${Y}</td> <!-- valor de multiplicacion -->
+        <td>${X0}</td> <!-- valor de xi+1 -->
+        <td>${ri}</td> <!-- valor de r -->
+    </tr> `;
+}
 
 function limpiarDatos() {
     document.getElementById('id-semilla').value = '';
