@@ -36,16 +36,6 @@ function exportarDatos() {
         }
     });
 }
-function exportarDatos2() {
-    html2canvas(document.getElementById('t02'), {
-        onrendered: function (canvas) {
-            var link = document.createElement('a');
-            link.href = canvas.toDataURL();
-            link.download = 'semillas.png';
-            link.click();
-        }
-    });
-}
 // funcion dar otro estilo a una fila por id 
 function styleID(id) {
     document.getElementById(id).style.color = "white";
