@@ -29,7 +29,7 @@ function multiplicadorConstante(X0, a, n) {
 
         if (XnMap.hasOwnProperty(x_a)) {  // Verificar si el valor ya ha sido generado antes
             const fila = `
-            <tr style="background-color: red; color: white;">
+            <tr style="background-color: gray; color: white;">
                 <td>X<sub>${i}</sub></td> <!-- posicion de x -->
                 <td>${a} * ${x_a}</td> <!-- representacion de multiplicacion -->
                 <td>${Y}</td> <!-- valor de multiplicacion -->
@@ -37,10 +37,10 @@ function multiplicadorConstante(X0, a, n) {
                 <td>${ri}</td> <!-- valor de r -->
             </tr> `;
             document.getElementById('t01').innerHTML += fila;
-            document.getElementById('result' + XnMap[x_a]).style.background = "blue";
+            document.getElementById('result' + XnMap[x_a]).style.background = "rgb(137 137 137)";
             document.getElementById('result' + XnMap[x_a]).style.color = "white";
 
-            alert('Algoritmo terminado.\n * Se encontró un valor duplicado con X' + XnMap[x_a] +
+            alert('Algoritmo terminado.\n * Se detectó un bucle entre X' + XnMap[x_a] +
                 ' e X' + i +
                 '\n * se detiene la generación de números');
             break;
@@ -67,13 +67,21 @@ function multiplicadorConstante(X0, a, n) {
 }
 
 document.getElementById('generarDatosBtn').addEventListener('click', function () {
-    var semilla = document.getElementById('id-semilla').value;
+    var semilla = parseInt(document.getElementById('id-semilla').value);
     var constante = document.getElementById('id-constante').value;
     var n = parseInt(document.getElementById('id-n').value);
 
     // validar si semilla e constante tiene la misma longitud sea > 3
-    if (semilla == '' || semilla.length <= 3 || constante == '' || constante.length <= 3 || semilla.length != constante.length) {
+    if (isNaN(semilla) || semilla.toString().length <= 3 || 
+        isNaN(constante) || constante.toString().length <= 3 || 
+        semilla.toString().length != constante.toString().length) {
         alert('Ingrese la semilla y constante\n * Un número entero positivo de mas de 3 dígitos\n * Misma longitud entre los valores.');
+        return;
+    }
+
+    // validar n 
+    if (!isNaN(n) && n <= 0) {
+        alert('Ingrese el número de iteraciones de forma correcta.\n * Un número entero positivo.');
         return;
     }
 

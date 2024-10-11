@@ -72,21 +72,23 @@ function productosMedios(X0, X1, n) {
 }
 // TODO: Validar que las semillas sean de la misma longitud
 document.getElementById('generarDatosBtn').addEventListener('click', function () {
-    var semilla = document.getElementById('id-semilla').value;
-    var semilla2 = document.getElementById('id-semilla2').value;
-    var n = document.getElementById('id-n').value;
+    var semilla = parseInt(document.getElementById('id-semilla').value);
+    var semilla2 = parseInt(document.getElementById('id-semilla2').value);
+    var n = parseInt(document.getElementById('id-n').value);
+    
+    // validar semillas, con longitud > 3, y ambas de la misma longitud
+    if (isNaN(semilla) || semilla.toString().length <= 3 ||  
+        isNaN(semilla2) || semilla2.toString().length <= 3 || 
+        semilla.toString().length != semilla2.toString().length) {
+        
+            alert('Ingrese la semilla.\n * Un número entero positivo de mas de 3 dígitos\n * Misma longitud entre las semillas.');
+        return;
+    }
 
-
-    if (n == '' || n <= 0) {
+    if ( isNaN(n) || n <= 0) {
         alert("Valor no valido para N\n * Ingrese un valor entero positivo para n");
         return;
     }
-    // validar semillas, con longitud > 3, y ambas de la misma longitud
-    if (semilla == '' || semilla.length <= 3 || semilla2 == '' || semilla2.length <= 3 || semilla.length != semilla2.length) {
-        alert('Ingrese la semilla.\n * Un número entero positivo de mas de 3 dígitos\n * Misma longitud entre las semillas.');
-        return;
-    }
-
 
     document.getElementById('t01').innerHTML =
         `<table id="t01" style="width: 860px; ">

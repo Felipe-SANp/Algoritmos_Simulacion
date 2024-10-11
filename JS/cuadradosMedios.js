@@ -28,7 +28,7 @@ function cuadradosMedios(semilla, n) {
         X = parseInt(Xn);
 
         if (XnMap.hasOwnProperty(X_a)) {
-            alert('Algoritmo terminado.\n * Se encontró semillas duplicadas' + XnMap[X_a] +
+            alert('Algoritmo terminado.\n * Se detectó un bucle entre ' + XnMap[X_a] +
                 ' y X' + i +
                 '\n * se detiene la generación de números');
 
@@ -67,10 +67,10 @@ function cuadradosMedios(semilla, n) {
 }
 
 document.getElementById('generarDatosBtn').addEventListener('click', function () {
-    var semilla = document.getElementById('id-semilla').value;
+    var semilla = parseInt(document.getElementById('id-semilla').value);
     var n = parseInt(document.getElementById('id-n').value);
 
-    if (semilla == '' || semilla.length <= 3) {
+    if (semilla == '' || isNaN(semilla)  ||semilla.toString().length <= 3) {
         alert('Ingrese la semilla.\n * Un número entero positivo de mas de 3 dígitos.');
         return;
     }
