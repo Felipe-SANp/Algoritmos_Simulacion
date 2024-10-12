@@ -1,52 +1,35 @@
 
-var validador = (function () {
-    // Función para verificar si un número es impar
-    function esImpar(numero) {
-        if (numero % 2 === 0) {
-            console.error("El valor de 'c' debe ser un número impar.");
-            return;
-        }
+// Función para verificar si un número es impar
+function esImpar(numero) {
+    if (numero % 2 === 0) {
+        alert("El valor de 'c' debe ser un número impar.");
+        return false;
     }
+    return true;
+}
 
-    // Función para verificar si un número es par
-    function esPar(numero) {
-        if (numero % 2 !== 0) {
-            console.error("El valor de 'a' debe ser un número par.");
-            return;
-        }
+// Función para verificar si un número es par
+function esPar(numero) {
+    if (numero % 2 !== 0) {
+        alert("El valor de 'a' debe ser un número par.");
+        return false;
     }
+    return true;
+}
 
-    // Función para verficar si m = 2^k
-    function esPotenciaDeDos(m) {
-        if ((m & (m - 1)) !== 0) {
-            console.error("El valor de 'm' debe ser una potencia de dos.");
-            return;
-        }
+// Funcion para validar b, (b-1) mod 4 = 1
+function validarB(b) {
+    if ((b - 1) % 4 !== 1) {
+        return false;
     }
+    alert("El valor de 'b' no debe cumplir con la condición:\n * (b-1) mod 4 = 1.");
+    return true;
+}
 
-    // Funcion para validar b, (b-1) mod 4 = 1
-    function validarB(b) {
-        if ((b - 1) % 4 !== 1) {
-            console.error("El valor de 'b' debe cumplir con la condición (b-1) mod 4 = 1.");
-            return;
-        }
-    }
-
-    return {
-        esImpar: esImpar,
-        esPar: esPar,
-        esPotenciaDeDos: esPotenciaDeDos,
-        validarB: validarB
-    };
-
-})();
 
 // Algoritmo congruencial cuadrático
-function congruencialCuadratico(X0, m, a, b, c) {
-    validador.esPar(a);
-    validador.esImpar(c);
-    validador.validarB(b);
-    validador.esPotenciaDeDos(m);
+function congruencialCuadratico(X0, g, a, b, c) {
+    let m = Math.pow(2, g);  // m = 2^g
     let n = m + 1;
     let numerosPseudoaleatorios = [];
     let Xi = X0;  // Semilla inicial
@@ -82,11 +65,21 @@ function congruencialCuadratico(X0, m, a, b, c) {
 }
 
 document.getElementById('generarDatosBtn').addEventListener('click', function() {
-    var semilla = document.getElementById('id-semilla').value;
-    var m = document.getElementById('id-m').value;
-    var a = document.getElementById('id-a').value;
-    var b = document.getElementById('id-b').value;
-    var c = document.getElementById('id-c').value;
+    var semilla = parseInt(document.getElementById('id-semilla').value);
+    var g = parseInt(document.getElementById('id-m').value);
+    var a = parseInt(document.getElementById('id-a').value);
+    var b = parseInt(document.getElementById('id-b').value);
+    var c = parseInt(document.getElementById('id-c').value);
+
+    if(isNaN(semilla) || semilla <= 0 || isNaN(g) || g <= 0 || isNaN(a) || a <= 0  || isNaN(b) || b <= 0 || isNaN(c) || c <= 0) {
+        alert("Ingrese un número entero positivo para los campos:\n * Semilla: valor entero\n * g: valor entero\n * a: par\n * b: (b-1) mod 4 = 1 \n * c: impar");
+        return
+    }
+
+    // validar que los valores sean enteros positivos
+    if (!esPar(a) || !esImpar(c) || validarB(b)){
+        return;
+    }
 
     document.getElementById('t01').innerHTML =
     `<table id="t01" style="width: 860px; ">
@@ -100,7 +93,7 @@ document.getElementById('generarDatosBtn').addEventListener('click', function() 
             <th>r<sub>i</sub></th> <!-- ri -->
         </tr>
     </table>`;
-    congruencialCuadratico(parseInt(semilla), parseInt(m), parseInt(a), parseInt(b), parseInt(c));
+    congruencialCuadratico(semilla, g, a, b, c);
 });
 
 function limpiarDatos() {
