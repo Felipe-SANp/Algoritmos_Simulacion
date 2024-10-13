@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Css/estilos.css">
     <link rel="shortcut icon" href="icon/oswla.png">
+    <!-- links para exportar a excel -->
+    <script src="https://unpkg.com/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
     <title>Black Lion 2.0</title>
 </head>
 
@@ -23,7 +27,9 @@
             </select>
         </div>
         <button class="menu-boton" id="limpiarBtn" type="button">Limpiar</button>
-        <button class="menu-boton" id="exportarBtn" type="button">Exportar (png)</button>
+        <button id="btnExportar" class="menu-boton">
+            <i class="fas fa-file-excel"></i> Exportar datos a Excel
+        </button>
     </div>
     <div class="contenedor-primario">
         <h2 id="titulo">Metodo de Congruencial Multiplicativo</h2>
@@ -43,7 +49,7 @@
                     </div>
                 </div>
                 <div class="tabla" id="tabla" style="display: block;">
-                    <table id="t01" style="width: 860px; ">
+                    <table id="t01" style="width: 860px;" tableexport-key="tabla">
                     </table>
                 </div>
             </div>
@@ -51,6 +57,5 @@
     </div>
     <script src="js/menu_opciones.js"></script>
     <script src="js/congruencialMultiplicativo.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </body>
 </html>
